@@ -57,7 +57,7 @@ def resolveBitrate(bitrate, k):
 
 def resolveFile(p, args):
     """procees media file"""
-    print("Start transfer video {}\n".format(p))
+    print("Start transfer video \"{}\"\n".format(p))
     if args.output:
         if not os.path.exists(os.path.dirname(args.output)):
             os.mkdir(os.path.dirname(args.output))
@@ -99,26 +99,27 @@ def main():
     if args.include :
         video_types.extend(['.mp4', '.mkv', '.webm'])
         
-    print("Config: \n\tUse 2 pass: {}, Bitrate: {},\n\tOutput Direrctory: {},\
-           Include mp4 videos: {}\n\tNow video types list: {}\n"
-         .format("True" if args.bitrate else "False", 
-                 resolveBitrate(args.bitrate, True) \
-                    if args.bitrate and not args.bitrate == '0' \
-                    else "Use origin video bitrate",
+    print("Config: \n\tMode: {},\n\tOutput Direrctory: \"{}\",\
+           \n\tNow surported video types list:\n\t {}\n"
+         .format("2 Pass, bitrate={}".format(
+                    resolveBitrate(args.bitrate, True) \
+                        if args.bitrate != '0' \
+                        else "Use origin video bitrate") \
+                            if args.bitrate \
+                            else "CRF, value={}".format(args.crf if args.crf  else '23'), 
                  args.output if args.output  else "Use origin video same dierctory",
-                 'True' if args.include else 'False',
                  video_types))
     paths = set(args.paths)
     if len(paths) != 0:
         dirs = []
         for dir in paths:
             if os.path.exists(dir):
-                if os.path.isdir():
+                if os.path.isdir(dir):
                     dirs.append(dir)
-                else if os.path.splitext(dir)[-1].lower() in video_types:
+                elif os.path.splitext(dir)[-1].lower() in video_types:
                     resolveFile(dir, args)
                 else:
-                    print("Path \"{}\" not surported.".format(dir))
+                    print("Path \"{}\" not surported, check if it's a video or \"-in\" argument is setted.".format(dir))
             else:
                 print("Path \"{}\" doesn't exists.".format(dir))
     else:
@@ -130,7 +131,7 @@ def main():
             if os.path.isfile(p):
                 if os.path.splitext(p)[-1].lower() in video_types:
                     resolveFile(p, args)
-                    print("\nTransfered video {} to {}\n".format(p, output))
+                    print("\nTransfered video \"{}\" to \"{}\"\n".format(p, output))
         print('Finished.')
 
 

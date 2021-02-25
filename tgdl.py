@@ -11,8 +11,8 @@ channel_link 要下载图片的频道链接
 proxy 将localhost改成代理地址,12345改成代理端口
 picture_storage_path 图片下载到的路径
 '''
-api_id = 2451424
-api_hash = "ed6b166d6b3f52ddb7b18e3e2809be35"
+api_id = 
+api_hash = ""
 channel_link = "https://t.me/Clashclient"
 proxy =("socks5","localhost",2222) #不需要代理的话删掉该行
 if len(sys.argv) == 2:
