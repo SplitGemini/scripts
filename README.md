@@ -2,7 +2,6 @@
 一些实用小脚本的集合，不定期更新～
 ### 下载telegram频道中的图片
 - 链接：[download-telegram-channel-pictures.py](./download-telegram-channel-pictures.py)
-
 - 环境: python3
 - 依赖: Telethon
   - 如果需要通过代理连接到telegram的话: aiohttp_socks (Python version>=3.6), PySocks (<=3.5)
@@ -17,5 +16,11 @@
 - 链接：[delete-duplicate-files.rb](./delete-duplicate-files.rb)
 - 环境：ruby2.6.2
 - 使用方法：将文件中“指定文件夹”替换为需要的值，然后```ruby delete-duplicate-files.rb```运行。
+
+# po_trans
+- [po_trans.py](./po_trans.py)
+- 环境: python3
+- 依赖: [deep_translator](https://github.com/nidhaloff/deep-translator)
+- 说明：翻译po文件，忽略已翻译的内容（即只翻译msgstr为空或和msgid内容相同部分）。deep_translator还不支持代理设置（目前），可用手动修改源码，在requests的get里添加proxies。同时deep_translator遇到错误会raise，可以加个try except防止中断。
 
 ### 
